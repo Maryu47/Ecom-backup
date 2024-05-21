@@ -5,18 +5,21 @@
     
         <section class="section">
           <div class="section-header">
-            <h1>Product</h1>
+            <h1>Product Variant</h1>
           </div>
 
+          <div class="mb-3"> 
+            <a href="{{route('admin.product.index')}}" class="btn btn-primary">Back</a>
+          </div>
           <div class="section-body">
            
             <div class="row">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>All Products</h4>
+                    <h4>Product: {{$product->name}}</h4>
                     <div class="card-header-action">
-                        <a href="{{route('admin.product.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create new</a>
+                        <a href="{{route('admin.product-variant.create' , ['product' => $product->id])}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create new</a>
                     </div>
                   </div>
                   <div class="card-body">
@@ -40,7 +43,7 @@
       let id = $(this).data('id');
 
       $.ajax({
-        url:"{{route('admin.product.change-status')}}" ,
+        url:"{{route('admin.product-variant.change-status')}}" ,
         method: 'PUT',
         data: {
           status : isChecked,
