@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ProductImageGalleryDataTable extends DataTable
+class VendorProductImageGalleryDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,7 +23,7 @@ class ProductImageGalleryDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
-                $deleteBtn = "<a href='".route('admin.product-image-gallery.destroy', $query->id)."' class='btn btn-danger ml-1 delete-item'><i class='fas fa-trash'></i></a>";
+                $deleteBtn = "<a href='".route('vendor.products-image-gallery.destroy', $query->id)."' class='btn btn-danger ml-1 delete-item'><i class='fas fa-trash'></i></a>";
 
                 return $deleteBtn;
             })
@@ -48,11 +48,11 @@ class ProductImageGalleryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('productimagegallery-table')
+                    ->setTableId('vendorproductimagegallery-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -72,11 +72,11 @@ class ProductImageGalleryDataTable extends DataTable
         return [
             
             Column::make('id')->width(100),
-            Column::make('image'),
+            Column::make('image')->width(200),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(400   )
+                  ->width(400)
                   ->addClass('text-center'),
         ];
     }
@@ -86,6 +86,6 @@ class ProductImageGalleryDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'ProductImageGallery_' . date('YmdHis');
+        return 'VendorProductImageGallery_' . date('YmdHis');
     }
 }

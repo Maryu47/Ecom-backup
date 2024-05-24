@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+  <meta name="csrf-token" content="{{ csrf_token()}}" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <title>One Shop || e-Commerce HTML Template</title>
   <link rel="icon" type="image/png" href="images/favicon.png">
@@ -22,6 +23,11 @@
   <link rel="stylesheet" href="{{asset('frontend/css/jquery.classycountdown.css')}}">
   <link rel="stylesheet" href="{{asset('frontend/css/venobox.min.css')}}">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <link rel="stylesheet" href="{{asset('backend/assets/modules/summernote/summernote-bs4.css')}}">
+  <link rel="stylesheet" href="//cdn.datatables.net/2.0.6/css/dataTables.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.bootstrap5.css">
+  <link rel="stylesheet" href="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.css')}}">
+  
 
   <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
@@ -100,6 +106,13 @@
   <!--classycountdown js-->
   <script src="{{asset('frontend/js/jquery.classycountdown.js')}}"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="{{asset('backend/assets/modules/summernote/summernote-bs4.js')}}"></script>
+
+  <script src="https://cdn.datatables.net/2.0.6/js/dataTables.bootstrap5.js"></script>
+  <script src="//cdn.datatables.net/2.0.6/js/dataTables.min.js"></script>
+  <script src="{{asset('backend/assets/modules/moment.min.js')}}"></script>
+  <script src="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!--main/custom js-->
   <script src="{{asset('frontend/js/main.js')}}"></script>
@@ -110,6 +123,84 @@
           @endforeach
         @endif
   </script>
+
+  <script>
+    //summernote
+    $('.summernote').summernote({
+      height:150
+    })
+    //date picker
+    $('.datepicker').daterangepicker({
+      locale: {
+        format: 'YYYY-MM-DD'
+      },
+      singleDatePicker: true
+    });
+  </script>
+
+<script>
+  $(document).ready(function(){
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    })
+
+    $('body').on('click', '.delete-item', function(event){
+        event.preventDefault();
+
+        let deleteUrl = $(this).attr('href');
+        
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+            $.ajax({
+              type: 'DELETE',
+              url: deleteUrl,
+
+              success: function(data){
+                if (data.status == 'success') {
+                  
+                  Swal.fire({
+                    title: "Deleted!",
+                    text: data.message,
+                    icon: "success"
+                  });
+                  setTimeout(function(){
+                    window.location.reload();
+                  }, 1000);
+                }else if (data.status == 'error'){
+                  Swal.fire({
+                    title: "Can't Delete!",
+                    text: data.message,
+                    icon: "error"
+                  });
+                }
+              },
+              error: function(xhr, status, error){
+                  console.log(error);
+              }
+            })
+
+            
+          }
+        });  
+
+    })
+
+  })
+</script>
+
+@stack('scripts')
 </body>
 
 </html>
