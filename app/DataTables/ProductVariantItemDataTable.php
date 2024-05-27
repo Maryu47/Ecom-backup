@@ -101,7 +101,6 @@ class ProductVariantItemDataTable extends DataTable
             Column::make('price'),
             Column::make('is_default'),
             Column::make('status'),
-            Column::make('updated_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
