@@ -205,9 +205,9 @@
                             <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
                             @if (checkDiscount($product))
                                 
-                                <h4>${{$product->offer_price}}<del>${{$product->price}}</del></h4>
+                                <h4>{{$product->offer_price}}{{$settings->currency_icon}}<del>{{$product->price}}{{$settings->currency_icon}}</del></h4>
                             @else
-                                <h4>${{$product->price}}</h4>
+                                <h4>{{$product->price}}{{$settings->currency_icon}}</h4>
                             @endif
                             <p class="review">
                                 <i class="fas fa-star"></i>
@@ -251,7 +251,7 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-12 mt-md-5 mt-lg-0">
-                        <div class="wsus_pro_det_sidebar" id="sticky_sidebar">
+                        <div class="wsus_pro_de_sidebar" id="sticky_sidebar">
                             <ul>
                                 <li>
                                     <span><i class="fal fa-truck"></i></span>
