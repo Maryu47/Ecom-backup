@@ -146,7 +146,7 @@
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
-    })
+    });
 
     $('body').on('click', '.delete-item', function(event){
         event.preventDefault();

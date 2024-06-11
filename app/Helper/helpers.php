@@ -52,3 +52,13 @@ function productType(string $type) {
             break;
     }
 }
+
+//get total sidebar cart amount
+function getSidebarCartTotal(){
+    $total = 0;
+    foreach (\Cart::content() as $product) {
+        $total += ($product->price + $product->options->variants_total) * $product->qty;
+    }
+    return $total;
+}
+

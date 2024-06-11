@@ -546,9 +546,9 @@ header {
   box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
 }
 
-.wsus__mini_cart .wsus__cart_img img {
+/* .wsus__mini_cart .wsus__cart_img img {
   height: 100%;
-}
+} */
 
 .wsis__del_icon {
   position: absolute;
@@ -9574,3 +9574,21 @@ a:not([href]):not([class]):hover {
 /* #sticky_pro_zoom{
   z-index: 9999 !important;
 } */
+
+.product_qty_wrapper {
+  display: flex;
+}
+.product_qty_wrapper>.product_qty {
+  width: 43px;
+  height: 36px;
+  padding-left: 5px;
+}
+
+.wsus__cart_list .wsus__pro_name {
+  width: 285px;
+}
+
+.wsus__mini_cart .wsus__cart_img img {
+  height: 70px;
+  object-fit: cover;
+}
