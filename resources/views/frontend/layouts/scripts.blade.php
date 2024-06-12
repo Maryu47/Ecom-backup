@@ -6,6 +6,7 @@
             }
         });
 
+
         //add product into cart
         $('.shopping-cart-form').on('submit', function(e) {
             e.preventDefault();
@@ -93,8 +94,9 @@
                 },
                 success: function(data) {
                     let productId = '#mini_cart_' + rowId;
-                    $(productId).remove()
-                    getSidebarCartSubtotal()
+                    $(productId).remove();
+                    getCartCount();
+                    getSidebarCartSubtotal();
                     if ($('.mini_cart_wrapper').find('li').length == 0) {
                         $('.mini_cart_actions').addClass('d-none');
                         $('.mini_cart_wrapper').html(

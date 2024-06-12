@@ -216,6 +216,7 @@
                                 <p class="description">{!! $product->short_description !!}</p>
 
                                 <form class="shopping-cart-form">
+                                    @csrf
                                     <div class="wsus__selectbox">
                                         <div class="row">
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">

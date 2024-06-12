@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -60,5 +61,39 @@ function getSidebarCartTotal(){
         $total += ($product->price + $product->options->variants_total) * $product->qty;
     }
     return $total;
+}
+
+//get payale total amount
+function getMainCartTotal() {
+    if (Session::has('coupon')) {
+        $coupon = Session::get('coupon');
+        $subTotal = getSidebarCartTotal();
+        if ($coupon['discount_type'] == 'amount') {
+            $total = $subTotal - $coupon['discount'];
+            return $total;  
+        }else if ($coupon['discount_type'] == 'percent') {
+            $discount = $subTotal - ($subTotal * $coupon['discount'] / 100);
+            $total = $subTotal - $discount;
+            return $total;  
+        }
+    } else {
+        return getSidebarCartTotal();
+    }
+}
+
+//get cart discount
+function getCartDiscount() {
+    if (Session::has('coupon')) {
+        $coupon = Session::get('coupon');
+        $subTotal = getSidebarCartTotal();
+        if ($coupon['discount_type'] == 'amount') {
+            return $coupon['discount'];  
+        }else if ($coupon['discount_type'] == 'percent') {
+            $discount = $subTotal - ($subTotal * $coupon['discount'] / 100);
+            return $discount;  
+        }
+    } else {
+        return 0;
+    }
 }
 

@@ -61,6 +61,7 @@
                                 <p class="wsus__price">{{ $product->price }}{{ $settings->currency_icon }}</p>
                             @endif
                             <form class="shopping-cart-form">
+                                @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 @foreach ($product->variants as $variant)
                                         <select  class="d-none" name="variants_items[]">
