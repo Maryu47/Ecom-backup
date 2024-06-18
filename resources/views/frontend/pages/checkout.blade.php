@@ -88,8 +88,8 @@
                         @endforeach
                         <div class="wsus__order_details_summery">
                             <p>subtotal: <span>{{ getSidebarCartTotal() }}{{ $settings->currency_icon }}</span></p>
-                            <p>shipping fee: <span id="shipping_fee">{{ $settings->currency_icon }}0</span></p>
-                            <p>coupon: <span>{{ getCartDiscount() }}{{ $settings->currency_icon }}</span></p>
+                            <p>shipping fee (+): <span id="shipping_fee">{{ $settings->currency_icon }}0</span></p>
+                            <p>coupon (-): <span>{{ getCartDiscount() }}{{ $settings->currency_icon }}</span></p>
                             <p><b>total:</b> <span><b id="total_amount"
                                         data-id="{{ getMainCartTotal() }}">{{ getMainCartTotal() }}{{ $settings->currency_icon }}</b></span>
                             </p>
