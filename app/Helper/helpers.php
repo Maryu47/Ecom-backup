@@ -37,20 +37,20 @@ function productType(string $type) {
     switch ($type) {
         case 'new_arrival':
             return 'New';
-            break;
+        break;
         case 'featured_product':
             return 'Featured';
-            break;
+        break;
         case 'top_product':
             return 'Top';
-            break;
+        break;
         case 'best_product':
             return 'Best';
-            break;
+        break;
         
         default:
             return '';
-            break;
+        break;
     }
 }
 

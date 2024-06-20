@@ -3,17 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\PaypalSetting;
+use App\Models\StripeSetting;
 use Illuminate\Http\Request;
 
-class PaypalSettingController extends Controller
+class StripeSettingController extends Controller
 {
-    
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
+    public function update(Request $request, string $id) {
+        
         $request->validate([
             'status' => ['required', 'integer'],
             'mode' => ['required', 'integer'],
@@ -24,7 +20,7 @@ class PaypalSettingController extends Controller
             'secret_key' => ['required'],
         ]);
 
-        PaypalSetting::updateOrCreate(
+        StripeSetting::updateOrCreate(
             ['id' => $id],
             [
                 'status' => $request->status,
