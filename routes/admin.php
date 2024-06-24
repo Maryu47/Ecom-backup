@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingController;
 use App\Http\Controllers\Backend\ProductController;
@@ -13,12 +14,14 @@ use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProductVariantItemController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\RazorpaySettingController;
 use App\Http\Controllers\Backend\SellerProductController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 //Admin Routes
@@ -92,6 +95,22 @@ Route::post('flash-sale/add-product', [FlashSaleController::class, 'addProduct']
 Route::put('flash-sale/show-at-home-status-change', [FlashSaleController::class, 'changeShowAtHomeStatus'])->name('flash-sale.show-at-home-change-status');
 Route::put('flash-sale-status', [FlashSaleController::class, 'changeStatus'])->name('flash-sale-status');
 Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destroy'])->name('flash-sale-destroy');
+
+//Order routes
+route::get('payment-status', [OrderController::class, 'changePaymentStatus'])->name('payment.status');
+route::get('order-status', [OrderController::class, 'changeOrderStatus'])->name('order.status');
+route::get('pending-orders', [OrderController::class, 'pendingOrders'])->name('pending-orders');
+route::get('processed-orders', [OrderController::class, 'processedOrders'])->name('processed-orders');
+route::get('dropped-off-orders', [OrderController::class, 'droppedOffOrders'])->name('dropped-off-orders');
+route::get('shipped-orders', [OrderController::class, 'shippedOrders'])->name('shipped-orders');
+route::get('out-for-delivery-orders', [OrderController::class, 'outForDeliveryOrders'])->name('out-for-delivery-orders');
+route::get('delivered-orders', [OrderController::class, 'deliveredOrders'])->name('delivered-orders');
+Route::resource('order', OrderController::class);
+
+//order transaction route
+route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
+
+route::get('canceled-orders', [OrderController::class, 'canceledOrders'])->name('canceled-orders');
 
 //setting route
 route::get('settings', [SettingController::class, 'index'])->name('settings.index');
