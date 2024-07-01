@@ -23,7 +23,8 @@
   <link rel="stylesheet" href="{{asset('frontend/css/jquery.classycountdown.css')}}">
   <link rel="stylesheet" href="{{asset('frontend/css/venobox.min.css')}}">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
+  <link rel="stylesheet" href="//cdn.datatables.net/2.0.6/css/dataTables.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.bootstrap5.css">
   <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
   <!-- <link rel="stylesheet" href="css/rtl.css"> -->
@@ -103,6 +104,9 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   {{-- sweet alert js --}}
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {{-- datatable js --}}
+  <script src="https://cdn.datatables.net/2.0.6/js/dataTables.bootstrap5.js"></script>
+  <script src="//cdn.datatables.net/2.0.6/js/dataTables.min.js"></script>
 
 
   <!--main/custom js-->
@@ -177,6 +181,7 @@
 
   })
 </script>
+@stack('scripts')
 </body>
 
 </html>

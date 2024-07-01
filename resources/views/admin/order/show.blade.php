@@ -140,15 +140,15 @@
                                             {{ $settings->currency_icon }}{{ $order->sub_total }}</div>
                                     </div>
                                     <div class="invoice-detail-item">
-                                        <div class="invoice-detail-name">Shipping (+)</div>
-                                        <div class="invoice-detail-value">
-                                            {{ $settings->currency_icon }}{{ @$shipping->cost }}</div>
-                                    </div>
-                                    <div class="invoice-detail-item">
                                         <div class="invoice-detail-name">Coupon (-)</div>
                                         <div class="invoice-detail-value">
                                             {{ $settings->currency_icon }}{{ @$coupon->discount ? @$coupon->discount : 0 }}
                                         </div>
+                                    </div>
+                                    <div class="invoice-detail-item">
+                                        <div class="invoice-detail-name">Shipping (+)</div>
+                                        <div class="invoice-detail-value">
+                                            {{ $settings->currency_icon }}{{ @$shipping->cost }}</div>
                                     </div>
                                     <hr class="mt-2 mb-2">
                                     <div class="invoice-detail-item">

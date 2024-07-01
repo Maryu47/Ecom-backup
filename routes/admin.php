@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingController;
@@ -115,6 +116,12 @@ route::get('canceled-orders', [OrderController::class, 'canceledOrders'])->name(
 //setting route
 route::get('settings', [SettingController::class, 'index'])->name('settings.index');
 route::put('general-setting-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update');
+
+//Home page setting routes
+route::get('home-page-setting', [HomePageSettingController::class, 'index'])->name('home-page-setting');
+route::put('popular-category-section', [HomePageSettingController::class, 'updatePopularCategorySection'])->name('popular-category-section');
+route::put('product-slider-section-one', [HomePageSettingController::class, 'updateProductSliderSectionOne'])->name('product-slider-section-one');
+route::put('product-slider-section-two', [HomePageSettingController::class, 'updateProductSliderSectionTwo'])->name('product-slider-section-two');
 
 //Coupon routes
 Route::put('coupons/change-status', [CouponController::class, 'changeStatus'])->name('coupons.change-status');
