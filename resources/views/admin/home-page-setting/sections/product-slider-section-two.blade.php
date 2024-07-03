@@ -8,7 +8,7 @@
             <form action="{{ route('admin.product-slider-section-two') }}" method="POST">
                 @csrf
                 @method('PUT')
-                <h5>Category 1</h5>
+                <h5>Category</h5>
                 <div class="row">
                     <div class="col md-4">
                         <div class="form-group">

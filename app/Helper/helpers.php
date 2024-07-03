@@ -28,7 +28,7 @@ function calculateDiscountPercent($originalPrice, $discountPrice) {
     $discountAmount = $originalPrice - $discountPrice;
     $discountPercent = ($discountAmount / $originalPrice) * 100;
 
-    return $discountPercent;
+    return round($discountPercent);
 }
 
 //check the product type
@@ -113,6 +113,7 @@ function getFinalPayableAmount(){
 
 //limit text
 function limitText($text, $limit = 20) {
-    return \Str::limit($text. $limit);
+    
+    return \Str::limit($text, $limit);
 }
 

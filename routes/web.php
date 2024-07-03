@@ -40,7 +40,9 @@ Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login'
 Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale');
 
 //Product detail routes
+Route::get('products/', [FrontProductController::class, 'productsIndex'])->name('products.index');
 Route::get('product-detail/{slug}', [FrontProductController::class, 'showProduct'])->name('product-detail');
+Route::get('change-product-list-view', [FrontProductController::class, 'ChangeListView'])->name('change-product-list-view');
 
 //cart routes
 Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
@@ -83,7 +85,4 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 
     //stripe routes
     Route::post('stripe/payment', [PaymentController::class, 'payWithStripe'])->name('stripe.payment');
-
-    //razorpay routes
-    Route::post('razorpay/payment', [PaymentController::class, 'payWithRazorPay'])->name('razorpay.payment');
 });

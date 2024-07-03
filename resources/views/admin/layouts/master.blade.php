@@ -96,7 +96,7 @@
           @foreach ($errors->all() as $error)
               toastr.error("{{$error}}")
           @endforeach
-        @endif
+    @endif
   </script>
 
   <!-- Dynamic Delete alert -->
