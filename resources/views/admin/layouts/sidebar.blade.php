@@ -171,7 +171,12 @@
         </ul>
       </li>
 
-      <li><a class="nav-link" href="{{route('admin.settings.index')}}"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+      <li class="{{setActive([
+        'admin.subscribers.index'
+      ])}}"><a class="nav-link" href="{{route('admin.subscribers.index')}}"><i class="fas fa-user-check"></i> <span>Subscribers</span></a></li>
+      <li class="{{setActive([
+        'admin.settings.index'
+      ])}}"><a class="nav-link" href="{{route('admin.settings.index')}}"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
 
         {{-- <li class="dropdown">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
