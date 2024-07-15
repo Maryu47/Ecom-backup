@@ -173,12 +173,20 @@
                                                     <a class="wsus__category"
                                                         href="#">{{ $product->category->name }} </a>
                                                     <p class="wsus__pro_rating">
+                                                        @php
+                                                        $avgRating = $product->reviews()->avg('rating');
+                                                        $fullRating = round($avgRating)
+                                                        @endphp
+
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $fullRating)
                                                         <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star-half-alt"></i>
-                                                        <span>(133 review)</span>
+                                                        @else
+                                                        <i class="far fa-star"></i>
+                                                        @endif
+                                                        @endfor
+                                                        
+                                                        <span>({{count($product->reviews)}} review)</span>
                                                     </p>
                                                     <a class="wsus__pro_name" href="{{route('product-detail', $product->slug)}}">{{limitText($product->name,55)}}</a>
                                                     @if (checkDiscount($product))
@@ -240,12 +248,20 @@
                                                 <div class="wsus__product_details">
                                                     <a class="wsus__category" href="#">{{@$product->category->name}}</a>
                                                     <p class="wsus__pro_rating">
+                                                        @php
+                                                        $avgRating = $product->reviews()->avg('rating');
+                                                        $fullRating = round($avgRating)
+                                                        @endphp
+
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $fullRating)
                                                         <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star-half-alt"></i>
-                                                        <span>(17 review)</span>
+                                                        @else
+                                                        <i class="far fa-star"></i>
+                                                        @endif
+                                                        @endfor
+                                                        
+                                                        <span>({{count($product->reviews)}} review)</span>
                                                     </p>
                                                     <a class="wsus__pro_name" href="#">{{$product->name}}</a>
                                                     @if (checkDiscount($product))
@@ -372,12 +388,20 @@
                                         <h4>{{ $product->price }}{{ $settings->currency_icon }}</h4>
                                     @endif
                                     <p class="review">
+                                        @php
+                                        $avgRating = $product->reviews()->avg('rating');
+                                        $fullRating = round($avgRating)
+                                        @endphp
+
+                                        @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $fullRating)
                                         <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                        <span>20 review</span>
+                                        @else
+                                        <i class="far fa-star"></i>
+                                        @endif
+                                        @endfor
+                                        
+                                        <span>({{count($product->reviews)}} review)</span>
                                     </p>
                                     <p class="description">{!! $product->short_description !!}</p>
 

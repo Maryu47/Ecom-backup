@@ -15,7 +15,7 @@
         <div class="row flash_sell_slider">
             @foreach ($flashSaleItems as $item)
                 @php
-                    $product = \App\Models\Product::find($item->product_id);
+                    $product = \App\Models\Product::with('reviews')->find($item->product_id);
                 @endphp
                 <div class="col-xl-3 col-sm-6 col-lg-4">
 
@@ -45,12 +45,20 @@
                         <div class="wsus__product_details">
                             <a class="wsus__category" href="#">{{ $product->category->name }} </a>
                             <p class="wsus__pro_rating">
+                                @php
+                                    $avgRating = $product->reviews()->avg('rating');
+                                    $fullRating = round($avgRating)
+                                @endphp
+
+                                @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $fullRating)
                                 <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(133 review)</span>
+                                @else
+                                <i class="far fa-star"></i>
+                                @endif
+                                @endfor
+                                
+                                <span>({{count($product->reviews)}} review)</span>
                             </p>
                             <a class="wsus__pro_name"
                                 href="{{ route('product-detail', $product->slug) }}">{{limitText($product->name, 50) }}</a>
@@ -91,7 +99,7 @@
     ===========================-->
 @foreach ($flashSaleItems as $item)
     @php
-        $product = \App\Models\Product::find($item->product_id);
+        $product = \App\Models\Product::with('reviews')->find($item->product_id);
     @endphp
 
     <section class="product_popup_modal">
@@ -147,12 +155,19 @@
                                         <h4>{{ $product->price }}{{ $settings->currency_icon }}</h4>
                                     @endif
                                     <p class="review">
+                                        @php
+                                        $avgRating = $product->reviews()->avg('rating');
+                                        $fullRating = round($avgRating)
+                                        @endphp
+
+                                        @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $fullRating)
                                         <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                        <span>20 review</span>
+                                        @else
+                                        <i class="far fa-star"></i>
+                                        @endif
+                                        @endfor
+                                    <span>({{count($product->reviews)}} review)</span>
                                     </p>
                                     <p class="description">{!! $product->short_description !!}</p>
 
