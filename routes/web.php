@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
+use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
@@ -69,6 +70,12 @@ Route::get('newsletter-verify/{token}', [NewsletterController::class, 'newsLette
 Route::get('vendor', [HomeController::class, 'vendorPage'])->name('vendor.index');
 Route::get('vendor-product/{id}', [HomeController::class, 'vendorProductPage'])->name('vendor.product');
 
+//about pages route
+Route::get('about', [PageController::class, 'about'])->name('about');
+
+//terms and condition pages route
+Route::get('terms-and-condition', [PageController::class, 'termsAndCondition'])->name('terms-and-condition');
+
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function(){
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [UserProfileController::class, 'index'])->name('profile');
@@ -92,9 +99,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::post('vendor-request', [UserVendorRequestController::class, 'create'])->name('vendor-request.create');
 
     
-    Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
     //product review routes
-    
+    Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
     Route::post('review', [ReviewController::class, 'create'])->name('review.create');
 
     //Checkout route

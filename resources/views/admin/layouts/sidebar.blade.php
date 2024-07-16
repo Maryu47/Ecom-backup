@@ -18,7 +18,9 @@
         <li class="dropdown {{ setActive([
             'admin.slider.*',
             'admin.home-page-setting',
-            'admin.vendors-condition.index'
+            'admin.vendors-condition.index',
+            'admin.about.index',
+            'admin.terms-and-condition.index'
         ])}}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Website</span></a>
           <ul class="dropdown-menu">
@@ -31,6 +33,12 @@
             <li class="{{setActive([
               'admin.vendors-condition.index'
             ])}}"><a class="nav-link" href="{{route('admin.vendors-condition.index')}}">Vendor Condition</a></li>
+            <li class="{{setActive([
+              'admin.admin.about.index'
+            ])}}"><a class="nav-link" href="{{route('admin.about.index')}}">About Page</a></li>
+            <li class="{{setActive([
+              'admin.terms-and-condition.index'
+            ])}}"><a class="nav-link" href="{{route('admin.terms-and-condition.index')}}">Terms Page</a></li>
           </ul>
         </li>
 

@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubscribersController;
+use App\Http\Controllers\Backend\TermsAndConditionController;
 use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\VendorConditionController;
 use App\Http\Controllers\Backend\VendorListController;
@@ -162,13 +164,21 @@ Route::put('vendor-requests/{id}/change-status', [VendorRequestController::class
 Route::get('customers-list', [CustomerListController::class, 'index'])->name('customers-list.index');
 Route::put('customers-list/change-status', [CustomerListController::class, 'changeStatus'])->name('customers-list.change-status');
 
-//Vendor list route
+//Vendor list routes
 Route::get('vendors-list', [VendorListController::class, 'index'])->name('vendors-list.index');
 Route::put('vendors-list/change-status', [VendorListController::class, 'changeStatus'])->name('vendors-list.change-status');
 
-//Vendor Condition
+//Vendor Condition routes
 Route::get('vendors-condition', [VendorConditionController::class, 'index'])->name('vendors-condition.index');
 Route::put('vendors-condition/update', [VendorConditionController::class, 'update'])->name('vendors-condition.update');
+
+//About routes
+Route::get('about', [AboutController::class, 'index'])->name('about.index');
+Route::put('about/update', [AboutController::class, 'update'])->name('about.update');
+
+//Terms and Condition routes
+Route::get('terms-and-condition', [TermsAndConditionController::class, 'index'])->name('terms-and-condition.index');
+Route::put('terms-and-condition/update', [TermsAndConditionController::class, 'update'])->name('terms-and-condition.update');
 
 
 //Footer routes
