@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\CustomerListController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\FooterGridThreeController;
 use App\Http\Controllers\Backend\FooterGridTwoController;
@@ -21,7 +22,6 @@ use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProductVariantItemController;
 use App\Http\Controllers\Backend\ProfileController;
-use App\Http\Controllers\Backend\RazorpaySettingController;
 use App\Http\Controllers\Backend\SellerProductController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\ShippingRuleController;
@@ -30,6 +30,9 @@ use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\TransactionController;
+use App\Http\Controllers\Backend\VendorConditionController;
+use App\Http\Controllers\Backend\VendorListController;
+use App\Http\Controllers\Backend\VendorRequestController;
 use Illuminate\Support\Facades\Route;
 
 //Admin Routes
@@ -149,6 +152,24 @@ Route::put('advertisement/homepage-banner-section-three', [AdvertisementControll
 Route::put('advertisement/homepage-banner-section-four', [AdvertisementController::class, 'HomepageBannerSectionFour'])->name('homepage-banner-section-four');
 Route::put('advertisement/productpage-banner', [AdvertisementController::class, 'productPageBanner'])->name('productpage-banner');
 Route::put('advertisement/cartpage-banner', [AdvertisementController::class, 'cartPageBanner'])->name('cartpage-banner');
+
+//Vendor Request routes
+Route::get('vendor-requests', [VendorRequestController::class, 'index'])->name('vendor-requests.index');
+Route::get('vendor-requests/{id}/show', [VendorRequestController::class, 'show'])->name('vendor-requests.show');
+Route::put('vendor-requests/{id}/change-status', [VendorRequestController::class, 'changeStatus'])->name('vendor-requests.change-status');
+
+//Customer list route
+Route::get('customers-list', [CustomerListController::class, 'index'])->name('customers-list.index');
+Route::put('customers-list/change-status', [CustomerListController::class, 'changeStatus'])->name('customers-list.change-status');
+
+//Vendor list route
+Route::get('vendors-list', [VendorListController::class, 'index'])->name('vendors-list.index');
+Route::put('vendors-list/change-status', [VendorListController::class, 'changeStatus'])->name('vendors-list.change-status');
+
+//Vendor Condition
+Route::get('vendors-condition', [VendorConditionController::class, 'index'])->name('vendors-condition.index');
+Route::put('vendors-condition/update', [VendorConditionController::class, 'update'])->name('vendors-condition.update');
+
 
 //Footer routes
 Route::resource('footer-info', FooterInfoController::class);

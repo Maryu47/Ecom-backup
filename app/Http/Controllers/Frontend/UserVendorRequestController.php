@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
+use App\Models\VendorCondition;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,8 @@ class UserVendorRequestController extends Controller
 {
     use ImageUploadTrait;
     public function index() {
-        return view('frontend.dashboard.vendor-request.index');
+        $content = VendorCondition::first();
+        return view('frontend.dashboard.vendor-request.index', compact('content'));
     }
 
     public function create(Request $request) {
@@ -24,6 +26,11 @@ class UserVendorRequestController extends Controller
             'shop_address' => ['required'],
             'about' => ['required'],
         ]);
+
+        if (Auth::user()->role == 'vendor') {
+            return redirect()->back();
+            
+        }
 
         $imagePath = $this->uploadImage($request, 'shop_image', 'uploads');
 

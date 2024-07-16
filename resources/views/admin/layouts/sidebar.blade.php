@@ -17,7 +17,8 @@
         {{-- Website --}}
         <li class="dropdown {{ setActive([
             'admin.slider.*',
-            'admin.home-page-setting'
+            'admin.home-page-setting',
+            'admin.vendors-condition.index'
         ])}}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Website</span></a>
           <ul class="dropdown-menu">
@@ -27,6 +28,9 @@
             <li class="{{setActive([
               'admin.home-page-setting'
             ])}}"><a class="nav-link" href="{{route('admin.home-page-setting')}}">Home Setting</a></li>
+            <li class="{{setActive([
+              'admin.vendors-condition.index'
+            ])}}"><a class="nav-link" href="{{route('admin.vendors-condition.index')}}">Vendor Condition</a></li>
           </ul>
         </li>
 
@@ -54,6 +58,27 @@
             <li class="{{setActive([
               'admin.footer-grid-three.*'
             ])}}"><a class="nav-link" href="{{route('admin.footer-grid-three.index')}}">Footer Grid Three</a></li>
+          </ul>
+        </li>
+
+        {{-- User  --}}
+        <li class="dropdown {{ setActive([
+            'admin.vendor-requests.index',
+            'admin.customers-list.index',
+            'admin.vendors-list.index',
+        ])}}">
+          <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>User</span></a>
+          <ul class="dropdown-menu">
+            <li class="{{setActive([
+              'admin.customers-list.index'
+            ])}}"><a class="nav-link" href="{{route('admin.customers-list.index')}}">Customers</a></li>
+            <li class="{{setActive([
+              'admin.vendors-list.index'
+            ])}}"><a class="nav-link" href="{{route('admin.vendors-list.index')}}">Vendors</a></li>
+            <li class="{{setActive([
+              'admin.vendor-requests.index'
+            ])}}"><a class="nav-link" href="{{route('admin.vendor-requests.index')}}">Pending vendors</a></li>
+
           </ul>
         </li>
 
