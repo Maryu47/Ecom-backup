@@ -20,4 +20,6 @@ class CustomerListController extends Controller
 
         return response(['message' => 'Status have been Updated']);
     }
+
+    
 }

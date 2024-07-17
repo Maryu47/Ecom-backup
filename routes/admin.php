@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\AdminListController;
 use App\Http\Controllers\Backend\AdminReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\AdvertisementController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Backend\FooterGridTwoController;
 use App\Http\Controllers\Backend\FooterInfoController;
 use App\Http\Controllers\Backend\FooterSocialController;
 use App\Http\Controllers\Backend\HomePageSettingController;
+use App\Http\Controllers\Backend\ManageUserController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingController;
@@ -163,6 +165,15 @@ Route::put('vendor-requests/{id}/change-status', [VendorRequestController::class
 //Customer list route
 Route::get('customers-list', [CustomerListController::class, 'index'])->name('customers-list.index');
 Route::put('customers-list/change-status', [CustomerListController::class, 'changeStatus'])->name('customers-list.change-status');
+
+//Admin list route
+Route::get('admins-list', [AdminListController::class, 'index'])->name('admins-list.index');
+Route::put('admins-list/change-status', [AdminListController::class, 'changeStatus'])->name('admins-list.change-status');
+Route::delete('admins-list/{id}', [AdminListController::class, 'destroy'])->name('admins-list.destroy');
+
+//Manage user routes
+Route::get('manage-user', [ManageUserController::class, 'index'])->name('manage-user.index');
+Route::post('manage-user', [ManageUserController::class, 'create'])->name('manage-user.create');
 
 //Vendor list routes
 Route::get('vendors-list', [VendorListController::class, 'index'])->name('vendors-list.index');
