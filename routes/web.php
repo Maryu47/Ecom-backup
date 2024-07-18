@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\FrontProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\ProductTrackController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
@@ -79,6 +80,9 @@ Route::get('terms-and-condition', [PageController::class, 'termsAndCondition'])-
 //contact route
 Route::get('contact', [PageController::class, 'contact'])->name('contact');
 Route::post('contact', [PageController::class, 'handleContactForm'])->name('handle-contact-form');
+
+//product track route
+Route::get('product-tracking', [ProductTrackController::class, 'index'])->name('product-tracking.index');
 
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function(){
