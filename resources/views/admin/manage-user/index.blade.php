@@ -15,9 +15,6 @@
                 <div class="card">
                   <div class="card-header">
                     <h4>Create Role</h4>
-                    <div class="card-header-action">
-                      <a href="{{route('admin.category.index')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Go back</a>
-                  </div>
                   </div>
                   <div class="card-body">
                       <form action="{{route('admin.manage-user.create')}}" method="POST">

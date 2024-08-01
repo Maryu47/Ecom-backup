@@ -115,8 +115,8 @@
                                 <div class="col-lg-8">
                                     <div class="col-md-4">
                                         <div class="form-group">
+                                            <label for="">Payment Status</label>
                                             <select name="" id="payment_status" class="form-control" data-id="{{$order->id}}">
-                                                <label for="">Payment Status</label>
                                                 <option {{$order->payment_status == 0 ? 'selected' : ''}} value="0">Pending</option>
                                                 <option {{$order->payment_status == 1 ? 'selected' : ''}} value="1">Completed</option>
                                             </select>

@@ -63,7 +63,7 @@ class BlogCategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => ['required', 'max:200', 'unique:blog_categories,id,'.$id], 
+            'name' => ['required', 'max:200', 'unique:blog_categories,name,'.$id], 
         ], [
             'name.unique' => 'Category already exist!'
         ]);

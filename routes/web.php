@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontProductController;
@@ -84,6 +85,10 @@ Route::post('contact', [PageController::class, 'handleContactForm'])->name('hand
 //product track route
 Route::get('product-tracking', [ProductTrackController::class, 'index'])->name('product-tracking.index');
 
+//blog routes
+Route::get('blog-details/{slug}', [BlogController::class, 'blogDetail'])->name('blog-details');
+Route::get('blog', [BlogController::class, 'blog'])->name('blog');
+
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function(){
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
@@ -111,6 +116,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     //product review routes
     Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
     Route::post('review', [ReviewController::class, 'create'])->name('review.create');
+
+    //blog comment route
+    Route::post('blog-comment', [BlogController::class, 'comment'])->name('blog-comment');
 
     //Checkout route
     Route::get('checkout', [CheckOutController::class, 'index'])->name('checkout');
