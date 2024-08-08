@@ -54,7 +54,7 @@
                                         <div class="col-xl-4 col-md-4">
                                             <div class="wsus__invoice_single text-md-end">
                                                 <h5>Order id: #{{$order->invoice_id}}</h5>
-                                                <h6>Order status: {{config('order_status.order_status_vendor')[$order->order_status]['status']}}</h6>
+                                                <h6>Order status: {{config('order_status.order_show_status_user')[$order->order_status]['status']}}</h6>
                                                 <p>Payment Method: {{$order->payment_method}} </p>
                                                 @if ($order->payment_status == 1)
                                                     <p>Payment status: Completed</p>
@@ -121,12 +121,10 @@
                                 </div>
                             </div>
                             <div class="wsus__invoice_footer">
-                                <p><span>Sub Total:</span>{{$settings->currency_icon}}{{$order->sub_total}}</p>
-                                <p><span>Coupon (-):</span> {{$settings->currency_icon}}{{@$coupon->discount ? @$coupon->discount : 0}}</p>  
-                                <p><span>Shipping Fee(+):</span> {{$settings->currency_icon}}{{$shipping->cost}}</p>
-                                
-                                
-                                <p><span>Total Amount :</span> {{$settings->currency_icon}}{{$order->amount }}</p>
+                                <p><span>Sub Total:</span>{{$settings->currency_icon}}{{@$order->sub_total}}</p>
+                                <p><span>Coupon (-):</span> {{$settings->currency_icon}}{{@$coupon->discount ? $coupon->discount : 0}}</p>  
+                                <p><span>Shipping Fee(+):</span> {{$settings->currency_icon}}{{@$shipping->cost}}</p>
+                                <p><span>Total Amount :</span> {{$settings->currency_icon}}{{@$order->amount }}</p>
                             </div>
                         </div>
                     </div>

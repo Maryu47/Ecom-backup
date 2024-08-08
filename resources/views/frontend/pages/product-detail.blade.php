@@ -441,6 +441,7 @@ PRODUCT MODAL VIEW START
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-5 mt-4 mt-lg-0">
+                                            @auth
                                             @php
                                                 $isBrought = false;
                                                 $orders = \App\Models\Order::where(['user_id' => auth()->user()->id, 'order_status' => 'delivered'])->get();
@@ -494,6 +495,7 @@ PRODUCT MODAL VIEW START
                                                 </form>
                                             </div>   
                                             @endif
+                                            @endauth
                                         </div>
                                     </div>
                                 </div>

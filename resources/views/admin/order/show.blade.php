@@ -11,7 +11,10 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>Orders</h1>
+            <h1>Orders detail</h1>
+        </div>
+        <div class="d-flex justify-content-end mb-4">
+            <a class="btn btn-primary " href="{{route('admin.order.index')}}">Back</a>
         </div>
 
         <div class="section-body">

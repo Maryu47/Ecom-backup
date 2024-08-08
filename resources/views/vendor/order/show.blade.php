@@ -18,6 +18,9 @@
         <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
           <div class="dashboard_content mt-2 mt-md-0">
             <h3><i class="far fa-user"></i>Order Details</h3>
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-primary " href="{{route('vendor.orders')}}">Back</a>
+            </div>
             <div class="wsus__dashboard_profile">
 
                 <!--============================
@@ -52,7 +55,7 @@
                                         <div class="col-xl-4 col-md-4">
                                             <div class="wsus__invoice_single text-md-end">
                                                 <h5>Order id: #{{$order->invoice_id}}</h5>
-                                                <h6>Order status: {{config('order_status.order_status_vendor')[$order->order_status]['status']}}</h6>
+                                                <h6>Order status: {{config('order_status.order_show_status_vendor')[$order->order_status]['status']}}</h6>
                                                 <p>Payment Method: {{$order->payment_method}} </p>
                                                 @if ($order->payment_status == 1)
                                                     <p>Payment status: Completed</p>
