@@ -39,16 +39,19 @@ class VendorController extends Controller
         $totalProduct = Product::where('vendor_id', Auth()->user()->vendor->id)->count();
 
         $todayEarnings = Order::whereDate('created_at', Carbon::today())
+        ->where('payment_status', 1)
         ->where('order_status', 'delivered')->whereHas('orderProducts', function($query){
             $query->where('vendor_id', Auth::user()->vendor->id);
         })->sum('amount');
 
         $monthEarnings = Order::whereMonth('created_at', Carbon::now()->month)
+        ->where('payment_status', 1)
         ->where('order_status', 'delivered')->whereHas('orderProducts', function($query){
             $query->where('vendor_id', Auth::user()->vendor->id);
         })->sum('amount');
 
         $yearEarnings = Order::whereYear('created_at', Carbon::now()->year)
+        ->where('payment_status', 1)
         ->where('order_status', 'delivered')->whereHas('orderProducts', function($query){
             $query->where('vendor_id', Auth::user()->vendor->id);
         })->sum('amount');

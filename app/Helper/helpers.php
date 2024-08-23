@@ -32,7 +32,7 @@ function calculateDiscountPercent($originalPrice, $discountPrice) {
 }
 
 //check the product type
-function productType(string $type) {
+function productType($type) {
 
     switch ($type) {
         case 'new_arrival':

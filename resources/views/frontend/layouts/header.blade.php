@@ -9,7 +9,7 @@
             <div class="col-xl-2 col-7 col-md-8 col-lg-4">
                 <div class="wsus_logo_area">
                     <a class="wsus__header_logo" href="{{url('/')}}">
-                        <img src="{{$logoSetting->logo}}" alt="logo" class="w-100" style="max-width: 85%; height: auto;">
+                        <img src="{{asset($logoSetting->logo)}}" alt="logo" class="w-100" style="max-width: 85%; height: auto;">
                     </a>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             <h5>Sub total <span id="mini_cart_subtotal">{{getSidebarCartTotal()}}{{$settings->currency_icon}}</span></h5>   
             <div class="wsus__minicart_btn_area">
                 <a class="common_btn" href="{{route('cart-details')}}">view cart</a>
-                <a class="common_btn" href="check_out.html">checkout</a>
+                <a class="common_btn" href="{{route('user.checkout')}}">checkout</a>
             </div>
         </div>
     </div>

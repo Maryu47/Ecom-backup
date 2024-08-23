@@ -32,12 +32,15 @@ class AdminController extends Controller
         $totalCompletedOrder = Order::where('order_status', 'delivered')->count();
 
         $todayEarnings = Order::whereDate('created_at', Carbon::today())
+        ->where('payment_status', 1)
         ->where('order_status','!=', 'canceled')->sum('amount');
 
         $monthEarnings = Order::whereMonth('created_at', Carbon::now()->month)
+        ->where('payment_status', 1)
         ->where('order_status','!=', 'canceled')->sum('amount');
 
         $yearEarnings = Order::whereYear('created_at', Carbon::now()->year)
+        ->where('payment_status', 1)
         ->where('order_status','!=', 'canceled')->sum('amount');
 
         $totalReviews = ProductReview::count();

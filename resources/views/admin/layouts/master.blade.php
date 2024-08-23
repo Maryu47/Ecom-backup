@@ -53,14 +53,6 @@
       <div class="main-content">
         @yield('content');
       </div>
-      <footer class="main-footer">
-        <div class="footer-left">
-          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
-        </div>
-        <div class="footer-right">
-          
-        </div>
-      </footer>
     </div>
   </div>
 
@@ -89,7 +81,7 @@
   <script src="{{asset('backend/assets/modules/select2/dist/js/select2.full.min.js')}}"></script>
 
   <!-- Page Specific JS File -->
-  <script src="{{asset('backend/assets/js/page/index-0.js')}}"></script>
+  {{-- <script src="{{asset('backend/assets/js/page/index-0.js')}}"></script> --}}
   
   <!-- Template JS File -->
   <script src="{{asset('backend/assets/js/scripts.js')}}"></script>

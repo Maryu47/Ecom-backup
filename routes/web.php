@@ -135,4 +135,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 
     //stripe routes
     Route::post('stripe/payment', [PaymentController::class, 'payWithStripe'])->name('stripe.payment');
+
+    //cod routes
+    Route::get('cod/payment', [PaymentController::class, 'payWithCod'])->name('cod.payment');
 });

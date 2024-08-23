@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CodSetting;
 use App\Models\GeneralSetting;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -64,6 +65,11 @@ class PaymentController extends Controller
             $orderProduct->unit_price = $item->price;
             $orderProduct->qty = $item->qty;
             $orderProduct->save();
+
+            //update product quantity
+            $updatedQty = $product->qty - $item->qty;
+            $product->qty = $updatedQty;
+            $product->save();
         }
 
         //store transaction details
@@ -204,6 +210,25 @@ class PaymentController extends Controller
             toastr('Something went wrong try again later!', 'error', 'Error');
             return redirect()->route('user.payment');
         }
+    }
+
+    //pay with cod
+    public function payWithCod(Request $request) {
+        $codPaySetting = CodSetting::first();
+        $setting = GeneralSetting::first();
+        if ($codPaySetting->status == 0) {
+            return redirect()->back();
+        }
+
+        //amount calculation
+        $total = getFinalPayableAmount();
+        $payableAmount = round($total, 2);
+
+        $this->storeOrder('COD', 0, \Str::random(10), $payableAmount, $setting->currency_name);
+        //clear session
+        $this->clearSession();
+
+        return redirect()->route('user.payment.success');
     }
 
 }
