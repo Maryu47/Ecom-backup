@@ -41,6 +41,7 @@ use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\VendorConditionController;
 use App\Http\Controllers\Backend\VendorListController;
 use App\Http\Controllers\Backend\VendorRequestController;
+use App\Http\Controllers\Backend\WithdrawMethodController;
 use Illuminate\Support\Facades\Route;
 
 //Admin Routes
@@ -132,8 +133,10 @@ Route::resource('order', OrderController::class);
 
 //order transaction route
 Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
-
 Route::get('canceled-orders', [OrderController::class, 'canceledOrders'])->name('canceled-orders');
+
+//withdraw method routes
+Route::resource('withdraw-method', WithdrawMethodController::class);
 
 //setting route
 Route::get('settings', [SettingController::class, 'index'])->name('settings.index');

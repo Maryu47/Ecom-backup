@@ -80,9 +80,16 @@
                 </ul>
             </li>
 
-
-
-
+            {{-- Wtihdraw Payements --}}
+            <li
+                class="dropdown {{ setActive(['admin.blog.*', 'admin.blog-category.*', 'admin.blog-comments.index']) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-book-open"></i>
+                    <span>Wtihdraw Payements</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ setActive(['admin.blog-category.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.withdraw-method.index') }}">Withdraw Method</a></li>
+                </ul>
+            </li>
 
             {{-- Orders --}}
             <li
