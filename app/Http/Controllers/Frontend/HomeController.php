@@ -16,6 +16,7 @@ use App\Models\Slider;
 use App\Models\SubCategory;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,7 @@ class HomeController extends Controller
         
         $sliders = Slider::where('status', 1)->orderBy('serial', 'asc')->get();
         $flashSaleDate = FlashSale::first();
-        $flashSaleItems = FlashSaleItem::where('show_at_home', 1)->where('status', 1)->get();
+        $flashSaleItems = FlashSaleItem::where('show_at_home', 1)->where('status', 1)->pluck('product_id')->toArray();
         $popularCategories = HomePageSetting::where('key','popular_category_section')->first();
         $brands = Brand::where('status', 1)->where('is_featured', 1)->get();
 
@@ -69,10 +70,18 @@ class HomeController extends Controller
     public function  getTypeBaseProduct() {
         $typeBaseProducts = [];
 
-        $typeBaseProducts['new_arrival'] = Product::where(['product_type' => 'new_arrival', 'is_approve' => 1, 'status' => 1])->orderBy('id', 'DESC')->take(8)->get();
-        $typeBaseProducts['featured_product'] = Product::where(['product_type' => 'featured_product', 'is_approve' => 1, 'status' => 1])->orderBy('id', 'DESC')->take(8)->get();
-        $typeBaseProducts['top_product'] = Product::where(['product_type' => 'top_product', 'is_approve' => 1, 'status' => 1])->orderBy('id', 'DESC')->take(8)->get();
-        $typeBaseProducts['best_product'] = Product::where(['product_type' => 'best_product', 'is_approve' => 1, 'status' => 1])->orderBy('id', 'DESC')->take(8)->get();
+        $typeBaseProducts['new_arrival'] = Product::withAvg('reviews', 'rating')->withCount('reviews')
+        ->with(['variants', 'category', 'productImageGalleries'])
+        ->where(['product_type' => 'new_arrival', 'is_approve' => 1, 'status' => 1])->orderBy('id', 'DESC')->take(8)->get();
+        $typeBaseProducts['featured_product'] = Product::withAvg('reviews', 'rating')->withCount('reviews')
+        ->with(['variants', 'category', 'productImageGalleries'])
+        ->where(['product_type' => 'featured_product', 'is_approve' => 1, 'status' => 1])->orderBy('id', 'DESC')->take(8)->get();
+        $typeBaseProducts['top_product'] = Product::withAvg('reviews', 'rating')->withCount('reviews')
+        ->with(['variants', 'category', 'productImageGalleries'])
+        ->where(['product_type' => 'top_product', 'is_approve' => 1, 'status' => 1])->orderBy('id', 'DESC')->take(8)->get();
+        $typeBaseProducts['best_product'] = Product::withAvg('reviews', 'rating')->withCount('reviews')
+        ->with(['variants', 'category', 'productImageGalleries'])
+        ->where(['product_type' => 'best_product', 'is_approve' => 1, 'status' => 1])->orderBy('id', 'DESC')->take(8)->get();
 
         return $typeBaseProducts;
     }
@@ -90,5 +99,13 @@ class HomeController extends Controller
         $vendor = Vendor::findOrFail($id);
         
         return view('frontend.pages.vendor-product', compact('products', 'categories', 'brands', 'vendor'));
+    }
+
+    public function ShowProductModal(string $id) {
+        $product = Product::findOrFail($id);
+
+        $content = view('frontend.layouts.modal', compact('product'))->render();
+
+        return Response::make($content, 200, ['Content-Type' => 'text/html']);
     }
 }

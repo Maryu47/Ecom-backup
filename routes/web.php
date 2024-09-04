@@ -44,6 +44,9 @@ require __DIR__.'/auth.php';
 
 Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sale');
 
+//product route
+Route::get('show-product-modal/{id}', [HomeController::class,'ShowProductModal'])->name('show-product-modal');
+
 //Product detail routes
 Route::get('products/', [FrontProductController::class, 'productsIndex'])->name('products.index');
 Route::get('product-detail/{slug}', [FrontProductController::class, 'showProduct'])->name('product-detail');

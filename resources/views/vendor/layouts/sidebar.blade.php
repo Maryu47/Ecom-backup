@@ -10,6 +10,7 @@
       <li><a class="{{setActive(['vendor.orders.*'])}}" href="{{route('vendor.orders')}}"><i class="far fa-address-book"></i>Orders</a></li>
       <li><a class="{{setActive(['vendor.products.*'])}}" href="{{route('vendor.products.index')}}"><i class="far fa-boxes"></i>Product</a></li>
       <li><a class="{{setActive(['vendor.reviews.*'])}}" href="{{route('vendor.reviews.index')}}"><i class="fas fa-star"></i>Reviews</a></li>
+      <li><a class="{{setActive(['vendor.withdraw.*'])}}" href="{{route('vendor.withdraw.index')}}"><i class="fas fa-money-check"></i>My Withdraw</a></li>
       <li><a class="{{setActive(['vendor.shop-profile.index'])}}" href="{{route('vendor.shop-profile.index')}}"><i class="fas fa-store"></i> Shop Profile</a></li>
       <li><a class="{{setActive(['vendor.profile'])}}" href="{{route('vendor.profile')}}"><i class="far fa-user"></i> My Profile</a></li>
       <li>
