@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Slider;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class SliderController extends Controller
 {
@@ -57,6 +58,7 @@ class SliderController extends Controller
         $slider->status = $request->status;
         $slider->save();
 
+        Cache::forget('sliders');
         toastr('Created Successfully!', 'success');
 
         return redirect()->back();
