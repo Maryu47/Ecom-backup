@@ -8,6 +8,7 @@
       <li><a class="{{setActive(['vendor.dashboard'])}}" href="{{route('vendor.dashboard')}}"><i class="fas fa-tachometer"></i>Dashboard</a></li>
       <li><a class="" href="{{route('home')}}"><i class="fas fa-home"></i>Go To Home</a></li>
       <li><a class="{{setActive(['vendor.orders.*'])}}" href="{{route('vendor.orders')}}"><i class="far fa-address-book"></i>Orders</a></li>
+      <li><a class="{{setActive(['vendor.messages.index'])}}" href="{{route('vendor.messages.index')}}"><i class="far fa-address-book"></i>Message</a></li>
       <li><a class="{{setActive(['vendor.products.*'])}}" href="{{route('vendor.products.index')}}"><i class="far fa-boxes"></i>Product</a></li>
       <li><a class="{{setActive(['vendor.reviews.*'])}}" href="{{route('vendor.reviews.index')}}"><i class="fas fa-star"></i>Reviews</a></li>
       <li><a class="{{setActive(['vendor.withdraw.*'])}}" href="{{route('vendor.withdraw.index')}}"><i class="fas fa-money-check"></i>My Withdraw</a></li>
