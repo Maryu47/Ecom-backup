@@ -80,6 +80,12 @@
                 </ul>
             </li>
 
+            {{-- Message --}}
+            <li class="{{ setActive(['admin.messages.index']) }}"><a class="nav-link"
+                    href="{{ route('admin.messages.index') }}"><i class="fas fa-user-check"></i>
+                    <span>Message</span></a>
+            </li>
+
            
 
             {{-- Orders --}}

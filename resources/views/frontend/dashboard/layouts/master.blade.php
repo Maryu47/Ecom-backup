@@ -32,6 +32,14 @@
   @if ($settings->layout == 'RTL')
     <link rel="stylesheet" href="{{asset('frontend/css/rtl.css')}}">
   @endif
+
+  <script>
+    const User = {
+      id: "{{auth()->user()->id}}",
+      name: "{{auth()->user()->name}}",
+      image: "{{asset(auth()->user()->image)}}",
+    }
+  </script>
 </head>
 
 <body>

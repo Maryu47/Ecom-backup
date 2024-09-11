@@ -104,6 +104,10 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 
     //**Message Route */
     Route::get('messages', [UserMessageController::class,'index'])->name('messages.index');
+    
+    //send message route
+    Route::post('send-messages', [UserMessageController::class,'sendMessages'])->name('send-messages');
+    Route::get('get-messages', [UserMessageController::class,'getMessages'])->name('get-messages');
 
     //User Address Routes
     Route::resource('address', UserAddressController::class);
@@ -120,7 +124,6 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::get('vendor-request', [UserVendorRequestController::class, 'index'])->name('vendor-request.index');
     Route::post('vendor-request', [UserVendorRequestController::class, 'create'])->name('vendor-request.create');
 
-    
     //product review routes
     Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
     Route::post('review', [ReviewController::class, 'create'])->name('review.create');

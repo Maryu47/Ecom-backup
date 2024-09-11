@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminListController;
@@ -141,6 +142,12 @@ Route::resource('withdraw-method', WithdrawMethodController::class);
 Route::get('withdraw', [WithdrawController::class,'index'])->name('withdraw.index');
 Route::get('withdraw/{id}', [WithdrawController::class,'show'])->name('withdraw.show');
 Route::put('withdraw/{id}', [WithdrawController::class,'update'])->name('withdraw.update');
+
+//Message route
+Route::get('messages', [MessageController::class,'index'])->name('messages.index');
+Route::get('get-messages', [MessageController::class,'getMessages'])->name('get-messages');
+Route::post('send-messages', [MessageController::class,'sendMessages'])->name('send-messages');
+
 
 //setting route
 Route::get('settings', [SettingController::class, 'index'])->name('settings.index');

@@ -28,16 +28,15 @@
   @if ($settings->layout == 'RTL')
   <link rel="stylesheet" href="{{asset('backend/assets/css/skins/rtl.css')}}">
   @endif
-<!-- Start GA -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-94034622-3');
-</script>
-<!-- /END GA --></head>
+  
+  <script>
+    const User = {
+      id: "{{auth()->user()->id}}",
+      name: "{{auth()->user()->name}}",
+      image: "{{asset(auth()->user()->image)}}",
+    }
+  </script>
+</head>
 
 <body>
   <div id="app">
