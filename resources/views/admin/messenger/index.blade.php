@@ -22,8 +22,11 @@
                         <div class="card-body">
                             <ul class="list-unstyled list-unstyled-border">
                                 @foreach ($chatUsers as $chatUser)
+                                @php
+                                    $unseenMessages = \App\Models\Chat::where(['sender_id' => $chatUser->senderProfile->id, 'receiver_id' => auth()->user()->id, 'seen' => 0])->exists();
+                                @endphp
                                 <li class="media chat-user-profile" data-id="{{$chatUser->senderProfile->id}}">
-                                    <img alt="image" class="mr-3 rounded-circle" width="50"
+                                    <img alt="image" class="mr-3 rounded-circle {{$unseenMessages ? 'msg-notification' : ''}}" width="50"
                                         src="{{asset($chatUser->senderProfile->image)}}">
                                     <div class="media-body">
                                         <div class="mt-0 mb-1 font-weight-bold chat-user-name">{{$chatUser->senderProfile->name}}</div>
@@ -37,11 +40,11 @@
                     </div>
                 </div>
                 <div class="col-md-9">
-                    <div class="card chat-box" id="mychatbox" style="height: 70vh">
+                    <div class="card chat-box d-none" id="mychatbox" style="height: 70vh">
                         <div class="card-header">
                             <h4 id="inbox-title"></h4>
                         </div>
-                        <div class="card-body chat-content">
+                        <div class="card-body chat-content" data-inbox="">
                         </div>
                         <div class="card-footer chat-form">
                             <form id="message-form">
@@ -83,7 +86,10 @@
                 let receiverId = $(this).data('id');
                 let receiverImage = $(this).find('img').attr('src')
                 let chatUsername = $(this).find('.chat-user-name').text();
+                mainChatInbox.attr('data-inbox', receiverId);
                 $('#receiver_id').val(receiverId);
+                $(this).find('img').removeClass('msg-notification');
+                $('.chat-box').removeClass('d-none')
                 
                 $.ajax({
                     method: 'GET',
@@ -135,19 +141,19 @@
                 let message = `<div class="chat-item chat-right" style=""><img src="${User.image}" style="height: 50px; object-fit: cover;"><div class="chat-details"><div class="chat-text">${messageData}</div></div></div>`
 
                 mainChatInbox.append(message);
+                $('.message-box').val('');
                 //scroll to bottom
                 scrollTobottom();
 
                 $.ajax({
                     method: 'POST',
-                    url: "{{ route('user.send-messages') }}",
+                    url: "{{ route('admin.send-messages') }}",
                     data: formData,
                     beforeSend: function() {
                         $('.send-button').prop('disable', true);
                         formSubmitting = true;
                     },
                     success: function(response) {
-                        $('.message-box').val('');
                     },
                     error: function(xhr, status, error) {
                         toastr.error(xhr.responseJSON.message);

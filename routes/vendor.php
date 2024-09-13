@@ -20,6 +20,9 @@ Route::post('profile', [VendorProfileController::class, 'updatePassword'])->name
 
 //**Message Route */
 Route::get('messages', [VendorMessageController::class,'index'])->name('messages.index');
+//send message route
+Route::post('send-messages', [VendorMessageController::class,'sendMessages'])->name('send-messages');
+Route::get('get-messages', [VendorMessageController::class,'getMessages'])->name('get-messages');
 
 //Vendor shop profile 
 Route::resource('shop-profile', VendorShopProfileController::class);

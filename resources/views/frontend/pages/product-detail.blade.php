@@ -22,6 +22,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary mt-2 send-button">Send</button>
             </form>
+            
         </div>
       </div>
     </div>
@@ -363,7 +364,7 @@
 
             $.ajax({
                 method: 'POST',
-                url: "{{route('user.send-message')}}",
+                url: "{{route('user.send-messages')}}",
                 data: formData,
                 beforeSend: function(){
                     let html = ` <span class="spinner-border spinner-border-sm text-light" role="status" aria-hidden="true"></span>
@@ -373,6 +374,9 @@
                 },
                 success: function(response) {
                     $('.message-box').val('');
+                    $('.message_modal').append(`
+                    <div class="alert alert-success mt-2"><a href="{{route('user.messages.index')}}" class="text-primary">Click here</a> for go to messenger</div> 
+                    `)
                     toastr.success(response.message)
                 },
                 error: function(xhr, status, error) {

@@ -9092,10 +9092,10 @@ DASHBOARD CHAT START
 ========================*/
 .wsus__chatlist,
 .wsus__chat_main_area {
+  height: 99vh;
   border-radius: 5px;
   background: #fff;
   box-shadow: rgba(0, 0, 0, 0.27) 0px 1px 4px;
-  height: 687px;
   overflow: hidden;
 }
 
@@ -9675,4 +9675,13 @@ a:not([href]):not([class]):hover {
     top: 0;
     color: white;
   }
+}
+
+.msg-notification{
+  border: 5px solid #08c !important;
+}
+.wsus__chat_area_footer{
+  width: 100% !important;
+  bottom: 0 !important;
+  position: absolute !important;
 }

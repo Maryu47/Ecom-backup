@@ -11,17 +11,20 @@
                         <div class="wsus__dashboard_review">
                             <div class="row">
                                 <div class="col-xl-4 col-md-5">
-                                    <div class="wsus__chatlist d-flex align-items-start">
+                                    <div class="wsus__chatlist d-flex align-items-start" style="height: 99vh">
                                         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
                                             aria-orientation="vertical">
                                             <h2>Seller List</h2>
                                             <div class="wsus__chatlist_body">
                                                 @foreach ($chatUsers as $chatUser)
+                                                @php
+                                                    $unseenMessages = \App\Models\Chat::where(['sender_id' => $chatUser->receiverProfile->id, 'receiver_id' => auth()->user()->id, 'seen' => 0])->exists();
+                                                @endphp
                                                     <button class="nav-link chat-user-profile"
                                                         data-id="{{ $chatUser->receiverProfile->id }}" data-bs-toggle="pill"
                                                         data-bs-target="#v-pills-home" type="button" role="tab"
                                                         aria-controls="v-pills-home" aria-selected="true">
-                                                        <div class="wsus_chat_list_img">
+                                                        <div class="wsus_chat_list_img {{$unseenMessages ? 'msg-notification' : ''}}">
                                                             <img src="{{ asset($chatUser->receiverProfile->image) }}"
                                                                 alt="user" class="img-fluid">
                                                             <span class="pending d-none" id="pending-6">0</span>
@@ -36,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-8 col-md-7">
-                                    <div class="wsus__chat_main_area">
+                                    <div class="wsus__chat_main_area d-none">
                                         <div class="tab-content" id="v-pills-tabContent">
                                             <div class="tab-pane fade show" id="v-pills-home" role="tabpanel"
                                                 aria-labelledby="v-pills-home-tab">
@@ -45,37 +48,11 @@
                                                         <div class="wsus__chat_area_header">
                                                             <h2 id="chat-inbox-title">Chat with Daniel Paul</h2>
                                                         </div>
-                                                        <div class="wsus__chat_area_body">
-
-                                                            {{-- <div class="wsus__chat_single single_chat_2">
-                                                                <div class="wsus__chat_single_img">
-                                                                    <img src="http://127.0.0.1:8000/uploads/custom-images/john-doe-2022-08-15-01-14-20-3892.png"
-                                                                        alt="user" class="img-fluid">
-                                                                </div>
-                                                                <div class="wsus__chat_single_text">
-                                                                    <p>Hello Paul</p>
-                                                                    <span>15 August, 2022, 12:57 PM</span>
-                                                                </div>
-                                                            </div> --}}
-
-
-
-                                                            {{-- <div class="wsus__chat_single">
-                                                                <div class="wsus__chat_single_img">
-                                                                    <img src="http://127.0.0.1:8000/uploads/custom-images/daniel-paul-2022-08-15-01-16-48-4881.png"
-                                                                        alt="user" class="img-fluid">
-                                                                </div>
-                                                                <div class="wsus__chat_single_text">
-                                                                    <p>Hi Joe, Thanks for your contact</p>
-                                                                    <span>15 August, 2022, 12:58 PM</span>
-                                                                </div>
-                                                            </div> --}}
+                                                        <div class="wsus__chat_area_body" data-index="">
 
                                                         </div>
                                                         <div class="wsus__chat_area_footer"
-                                                            style="margin-top: 50px;
-                                                        margin-top: 50px;
-                                                        position: absolute;
+                                                            style="
                                                         width: 100%;
                                                         bottom: 0;">
                                                             <form id="message-form">
@@ -120,7 +97,7 @@
             const formatedDataTime = new Intl.DateTimeFormat('en-us', options).format(new Date(dateTimeString));
             return formatedDataTime;
         }
-
+ 
         function scrollTobottom() {
             mainChatInbox.scrollTop(mainChatInbox.prop("scrollHeight"))
         }
@@ -130,6 +107,9 @@
                 let senderImage = $(this).find('img').attr('src');
                 let chatUsername = $(this).find('h4').text();
                 $('#receiver_id').val(receiverId);
+                mainChatInbox.attr('data-inbox', receiverId);
+                $(this).find('.wsus_chat_list_img').removeClass('msg-notification');
+                $('.wsus__chat_main_area').removeClass('d-none')
 
                 $.ajax({
                     method: 'GET',
@@ -209,6 +189,7 @@
                     </div>`
 
                 mainChatInbox.append(message);
+                $('.message-box').val('');
                 //scroll to bottom
                 scrollTobottom();
 
@@ -221,7 +202,6 @@
                         formSubmitting = true;
                     },
                     success: function(response) {
-                        $('.message-box').val('');
                     },
                     error: function(xhr, status, error) {
                         toastr.error(xhr.responseJSON.message);
